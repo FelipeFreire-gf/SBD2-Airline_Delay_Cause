@@ -7,7 +7,7 @@ ETL pipeline seguindo a arquitetura medallion para a análise de dados do airbnb
 </div>
 
 <div align="center">
-<img src="docs/assets/sbd2AustinF.png" alt="Logo" style=" max-width: 100%; height: auto; margin-bottom: 20px;">
+<img src="docs/assets/sbd2AustinFF.png" alt="Logo" style=" max-width: 100%; height: auto; margin-bottom: 20px;">
 </div>
 <div align="center">
 
