@@ -20,7 +20,7 @@ Este repositório é dedicado à documentação de todos os artefatos criados pe
 
 O objetivo do projeto é modelar um painel power bi seguindo:
 
-- A arquitetura Lakehouse para armazenar e processar dados da Fórmula 1, organizada nas camadas Bronze, Silver e Gold;
+- A arquitetura Lakehouse para armazenar e processar dados do Airbnb de Austin, organizada nas camadas Bronze, Silver e Gold;
 
 - Modelar os dados por meio de representações conceitual (MER), lógica (DER) e física (DLD);
 
