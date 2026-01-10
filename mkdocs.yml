@@ -1,0 +1,60 @@
+site_name: Power Bi Air bnb de Austin Texas
+
+repo_url: https://github.com/FelipeFreire-gf/SBD2-Austin-Airbnb
+repo_name: 2025.4-austinBnb
+site_description: "Documentação da Análise de Dados do Air bnb de Austin Texas"
+
+nav:
+  - Home: index.md
+  
+  - Entrega 0 - Base de Dados:
+    - Proposito de Avaliação: pages/entrega0/0.md
+
+  - Entrega 1 - Raw e Silver:
+    - Planejamento de Avaliação: pages/entrega1/1.md
+
+  - Entrega 2 - Gold:
+    - Descrição da Medição: pages/entrega2/2.md
+
+  - Entrega 3 - Power Bi:
+    - Execução da Medição: pages/entrega3/3.md
+
+theme:
+  name: material
+  language: pt-BR
+
+  features:
+    - content.code.annotate
+    - content.tabs.link
+    - header.autohide
+    - navigation.instant
+    - navigation.top
+    - navigation.tracking
+  
+  palette:
+    - scheme: default
+      primary: '--md-primary-fg-color'
+      accent: '--md-primary-fg-color'
+      toggle:
+        icon: material/lightbulb-outline
+        name: Mude para o tema escuro
+        
+    - scheme: slate
+      primary: '--md-primary-fg-color'
+      accent: '--md-primary-fg-color'
+      toggle:
+        icon: material/lightbulb
+        name: Mude para o tema claro
+
+  
+  logo: assets/shawR2I.ico
+  favicon: assets/shawR2.png
+  highlightjs: true
+
+extra_css:
+  - overrides/styles.css
+
+markdown_extensions:
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
