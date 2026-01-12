@@ -12,9 +12,9 @@ CREATE TABLE silver.one_big_table (
     room_type VARCHAR(50),
     bed_type VARCHAR(50),
     accommodates INTEGER,
-    bathrooms DECIMAL(3,1),
-    bedrooms DECIMAL(3,1),
-    beds DECIMAL(3,1),
+    bathrooms INTEGER,
+    bedrooms INTEGER,
+    beds INTEGER,
     
     neighbourhood_cleansed VARCHAR(50),
     city VARCHAR(100),
