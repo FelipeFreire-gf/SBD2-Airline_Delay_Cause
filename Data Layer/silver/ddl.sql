@@ -79,6 +79,8 @@ CREATE TABLE silver.one_big_table (
     
     review_date DATE,
     reviewer_id INTEGER,
-    reviewer_name VARCHAR(200)
+    reviewer_name VARCHAR(200),
+    
+    PRIMARY KEY (listing_id, calendar_date)
 );
 
