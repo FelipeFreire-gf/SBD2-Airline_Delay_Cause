@@ -1,17 +1,18 @@
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: amazon_sales_postgres
+    container_name: austin_airbnb_postgres
     restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-amazon_sales}
+      POSTGRES_DB: ${POSTGRES_DB:-austin_airbnb}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       TZ: ${TZ:-UTC}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./Data Layer/silver/ddl.sql:/docker-entrypoint-initdb.d/01-schema.sql
 
 volumes:
   postgres_data:
