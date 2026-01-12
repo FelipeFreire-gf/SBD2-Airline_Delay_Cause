@@ -38,6 +38,9 @@ Link para a nossa documentação do projeto: [Clique Aqui](https://requisitos-de
 
 Link
 
+## MIRO
+
+Link para do MIRO para melhor gestão do projeto: [Clique Aqui](https://miro.com/app/board/uXjVGSwQ8Ok=/?share_link_id=465202330329) <br>
 
 ## Como Executar
 
