@@ -212,7 +212,7 @@ SBD2-Austin-Airbnb/
 ## Entregas do Projeto
 
 | Entrega | Título | Status | Descrição |
-|---------|--------|--------|-----------||
+|---------|--------|--------|-----------|
 | **0** | Base de Dados | Concluído | Coleta e armazenamento dos dados brutos (Bronze) |
 | **1** | Raw → Silver | Concluído | Pipeline ETL, limpeza e carga no PostgreSQL |
 | **2** | Gold Layer | Em desenvolvimento | Agregações, métricas e visualizações analíticas |
