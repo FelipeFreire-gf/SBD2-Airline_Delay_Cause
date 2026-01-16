@@ -1,4 +1,4 @@
-# Análise de Atrasos de Voos em Aeroportos ✈️
+# Análise de Atrasos de Voos em Aeroportos
 
 <div align="center">
 
@@ -27,36 +27,36 @@
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Este repositório é dedicado à documentação de todos os artefatos criados pelo **Grupo 04** na disciplina de **Banco de Dados 2** da Faculdade de Ciências e Tecnologias em Engenharia da **Universidade de Brasília (FCTE-UnB)**.
 
-### 🎯 Objetivos
+### Objetivos
 
 O projeto implementa um **pipeline ETL completo** utilizando a **Arquitetura Medallion** para análise de dados históricos de atrasos de voos nos Estados Unidos. Os principais objetivos são:
 
-- 🗄️ **Arquitetura Lakehouse**: Implementar camadas Bronze (Raw), Silver (Curated) e Gold (Aggregated) para armazenamento e processamento otimizado
+- **Arquitetura Lakehouse**: Implementar camadas Bronze (Raw), Silver (Curated) e Gold (Aggregated) para armazenamento e processamento otimizado
 
-- 📊 **Modelagem de Dados**: Desenvolver representações conceitual (MER), lógica (DER) e física (DDL) do modelo de dados
+- **Modelagem de Dados**: Desenvolver representações conceitual (MER), lógica (DER) e física (DDL) do modelo de dados
 
-- 🐘 **Banco de Dados**: Construir e popular um banco PostgreSQL containerizado para consultas eficientes
+- **Banco de Dados**: Construir e popular um banco PostgreSQL containerizado para consultas eficientes
 
-- 📈 **Dashboard Analítico**: Desenvolver painéis interativos no Power BI para exploração de dados e geração de insights sobre:
+- **Dashboard Analítico**: Desenvolver painéis interativos no Power BI para exploração de dados e geração de insights sobre:
   - Atrasos de voos por companhia aérea
   - Causas de atrasos (meteorologia, companhia, NAS, segurança, aeronave)
   - Padrões de sazonalidade
   - Cancelamentos e desvios
   - Tendências temporais
 
-### 📊 Fonte de Dados
+### Fonte de Dados
 
 Os dados são provenientes do **Bureau of Transportation Statistics (BTS)** do governo dos Estados Unidos, contendo informações detalhadas sobre operações de voos, incluindo métricas de performance, causas de atrasos e estatísticas temporais.
 
 Para mais detalhes veja a documentação:
 
-## 📚 Documentação
+## Documentação
 
-🔗 **Site de Documentação**: [https://felipefreire-gf.github.io/SBD2-Austin-Airbnb/](https://felipefreire-gf.github.io/SBD2-Austin-Airbnb/)
+**Site de Documentação**: [https://felipefreire-gf.github.io/SBD2-Austin-Airbnb/](https://felipefreire-gf.github.io/SBD2-Austin-Airbnb/)
 
 A documentação completa inclui:
 - Estrutura das camadas Bronze, Silver e Gold
@@ -65,9 +65,9 @@ A documentação completa inclui:
 - Guia de instalação e execução
 - Análises e visualizações implementadas
 
-## 📊 Dashboard Power BI
+## Dashboard Power BI
 
-🚧 **Em desenvolvimento** - Dashboard interativo para análise de atrasos de voos
+**Em desenvolvimento** - Dashboard interativo para análise de atrasos de voos
 
 **Features planejadas:**
 - Visão geral de métricas (KPIs principais)
@@ -76,9 +76,9 @@ A documentação completa inclui:
 - Análise temporal e sazonalidade
 - Análise por aeroporto
 
-## 🎨 MIRO - Gestão do Projeto
+## MIRO - Gestão do Projeto
 
-📋 **Board Colaborativo**: [Acessar MIRO](https://miro.com/app/board/uXjVGSwQ8Ok=/?share_link_id=465202330329)
+**Board Colaborativo**: [Acessar MIRO](https://miro.com/app/board/uXjVGSwQ8Ok=/?share_link_id=465202330329)
 
 Utilize o board do MIRO para:
 - Acompanhar o progresso das entregas
@@ -88,7 +88,7 @@ Utilize o board do MIRO para:
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 
@@ -146,7 +146,7 @@ Acesse: `http://localhost:8000`
 
 ---
 
-## 🗂️ Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 SBD2-Austin-Airbnb/
@@ -177,7 +177,7 @@ SBD2-Austin-Airbnb/
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 | Categoria | Tecnologias |
 |-----------|-------------|
@@ -189,38 +189,38 @@ SBD2-Austin-Airbnb/
 
 ---
 
-## 📈 Principais Análises
+## Principais Análises
 
-✈️ **13 Visualizações Implementadas:**
+**13 Visualizações Implementadas:**
 
-1. 🔗 Matriz de Correlação entre tipos de atrasos
-2. 🏢 Ranking de companhias aéreas por atraso médio
-3. 🌦️ Impacto das condições meteorológicas
-4. 📅 Sazonalidade mensal e anual
-5. 📊 Tendências temporais de atrasos
-6. 🎯 Breakdown por causa de atraso (Grid 2x2)
-7. 📉 Contribuição média de cada causa
-8. 📈 Distribuições estatísticas (histogramas)
-9. 🏆 Top rankings categóricos
-10. ✈️ Tendências de voos ao longo do tempo
-11. 📆 Agregações mensais
-12. 📅 Agregações anuais
-13. 🔄 Decomposição sazonal (STL)
+1. Matriz de Correlação entre tipos de atrasos
+2. Ranking de companhias aéreas por atraso médio
+3. Impacto das condições meteorológicas
+4. Sazonalidade mensal e anual
+5. Tendências temporais de atrasos
+6. Breakdown por causa de atraso (Grid 2x2)
+7. Contribuição média de cada causa
+8. Distribuições estatísticas (histogramas)
+9. Top rankings categóricos
+10. Tendências de voos ao longo do tempo
+11. Agregações mensais
+12. Agregações anuais
+13. Decomposição sazonal (STL)
 
 ---
 
-## 🎯 Entregas do Projeto
+## Entregas do Projeto
 
 | Entrega | Título | Status | Descrição |
-|---------|--------|--------|-----------|
-| **0** | Base de Dados | ✅ Concluído | Coleta e armazenamento dos dados brutos (Bronze) |
-| **1** | Raw → Silver | ✅ Concluído | Pipeline ETL, limpeza e carga no PostgreSQL |
-| **2** | Gold Layer | ✅ Concluído | Agregações, métricas e visualizações analíticas |
-| **3** | Power BI | 🚧 Em desenvolvimento | Dashboard interativo e publicação |
+|---------|--------|--------|-----------||
+| **0** | Base de Dados | Concluído | Coleta e armazenamento dos dados brutos (Bronze) |
+| **1** | Raw → Silver | Concluído | Pipeline ETL, limpeza e carga no PostgreSQL |
+| **2** | Gold Layer | Em desenvolvimento | Agregações, métricas e visualizações analíticas |
+| **3** | Power BI | Em desenvolvimento | Dashboard interativo e publicação |
 
 ---
 
-## 👥 Equipe
+## Equipe
 
 **Grupo 04 - Banco de Dados 2 | FCTE-UnB**
 
@@ -262,44 +262,18 @@ SBD2-Austin-Airbnb/
 
 ---
 
-## 🤝 Como Contribuir
-
-Contribuições são sempre bem-vindas! Para contribuir:
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'feat: adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
-Leia o [Guia de Contribuição](CONTRIBUTING.md) para mais detalhes sobre o padrão de commits e branches.
-
----
-
-## 📄 Licença
+## Licença
 
 Este projeto é parte de uma atividade acadêmica da disciplina de **Banco de Dados 2** da **Universidade de Brasília (UnB)**.
 
 **Instituição**: Faculdade de Ciências e Tecnologias em Engenharia (FCTE)  
 **Curso**: Engenharia de Software  
-**Período**: 2025.1
-
----
-
-## 📞 Contato
-
-Para dúvidas ou sugestões sobre o projeto:
-
-- 📧 Email: [felipe.neves@aluno.unb.br](mailto:felipe.neves@aluno.unb.br)
-- 🐙 GitHub: [@FelipeFreire-gf](https://github.com/FelipeFreire-gf)
-- 📋 Issues: [Abrir issue no GitHub](https://github.com/FelipeFreire-gf/SBD2-Austin-Airbnb/issues)
+**Período**: 2025.4
 
 ---
 
 <div align="center">
 
-**⭐ Se este projeto foi útil, considere dar uma estrela no repositório!**
-
-<sub>Desenvolvido com 💙 pelo Grupo 04 | UnB - 2025</sub>
+<sub>Desenvolvido pelo Grupo 04 | UnB - 2026</sub>
 
 </div>
