@@ -1,0 +1,1545 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do Projeto de Análise de Atrasos de Voos em Aeroportos dos Estados Unidos">
+      
+      
+      
+      
+        <link rel="prev" href="../../entrega2/2/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/shawR2.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Execução da Medição - Análise de Atrasos de Voos em Aeroportos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../overrides/styles.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="--md-primary-fg-color" data-md-color-accent="--md-primary-fg-color">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#entrega-3-power-bi" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="Análise de Atrasos de Voos em Aeroportos" class="md-header__button md-logo" aria-label="Análise de Atrasos de Voos em Aeroportos" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Análise de Atrasos de Voos em Aeroportos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Execução da Medição
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="--md-primary-fg-color" data-md-color-accent="--md-primary-fg-color"  aria-label="Mude para o tema escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mude para o tema escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="--md-primary-fg-color" data-md-color-accent="--md-primary-fg-color"  aria-label="Mude para o tema claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mude para o tema claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/FelipeFreire-gf/SBD2-Austin-Airbnb" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2025.4-airline-delays
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Análise de Atrasos de Voos em Aeroportos" class="md-nav__button md-logo" aria-label="Análise de Atrasos de Voos em Aeroportos" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Análise de Atrasos de Voos em Aeroportos
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/FelipeFreire-gf/SBD2-Austin-Airbnb" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2025.4-airline-delays
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega 0 - Base de Dados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entrega 0 - Base de Dados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega0/0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proposito de Avaliação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega 1 - Raw e Silver
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entrega 1 - Raw e Silver
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega1/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento de Avaliação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega 2 - Gold
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entrega 2 - Gold
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega2/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrição da Medição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega 3 - Power Bi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entrega 3 - Power Bi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução da Medição
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execução da Medição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#execucao-da-medicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execução da Medição
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Execução da Medição">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura-de-conexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura de Conexão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-de-conexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração de Conexão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuração de Conexão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-conexao-ao-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Conexão ao PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-importacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Importação de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-do-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrutura do Dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estrutura do Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagina-1-visao-geral-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 1: Visão Geral (Overview)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-2-analise-por-companhia-aerea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 2: Análise por Companhia Aérea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-3-causas-de-atrasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 3: Causas de Atrasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-4-analise-temporal-e-sazonalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 4: Análise Temporal e Sazonalidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-5-analise-por-aeroporto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 5: Análise por Aeroporto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medidas-dax-criadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Medidas DAX Criadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabelas-calculadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabelas Calculadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatacao-e-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formatação e Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interatividade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interatividade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-e-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance e Otimização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacao-do-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentação do Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metricas-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas de Sucesso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Passos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#links-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links Úteis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#execucao-da-medicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execução da Medição
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Execução da Medição">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura-de-conexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura de Conexão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-de-conexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração de Conexão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuração de Conexão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-conexao-ao-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Conexão ao PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-importacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Importação de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-do-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrutura do Dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estrutura do Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagina-1-visao-geral-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 1: Visão Geral (Overview)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-2-analise-por-companhia-aerea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 2: Análise por Companhia Aérea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-3-causas-de-atrasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 3: Causas de Atrasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-4-analise-temporal-e-sazonalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 4: Análise Temporal e Sazonalidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagina-5-analise-por-aeroporto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página 5: Análise por Aeroporto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medidas-dax-criadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Medidas DAX Criadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabelas-calculadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabelas Calculadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatacao-e-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formatação e Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interatividade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interatividade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-e-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance e Otimização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacao-do-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentação do Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metricas-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas de Sucesso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Passos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#links-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links Úteis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="entrega-3-power-bi">Entrega 3 - Power BI</h1>
+<h2 id="execucao-da-medicao">Execução da Medição</h2>
+<h3 id="objetivo">Objetivo</h3>
+<p>Desenvolver dashboard interativo no <strong>Power BI</strong> para visualização e análise dos dados de atrasos de voos, permitindo exploração dinâmica e geração de insights de negócio.</p>
+<h3 id="arquitetura-de-conexao">Arquitetura de Conexão</h3>
+<div class="highlight"><pre><span></span><code>PostgreSQL (silver.airline_delays)
+        ↓
+    Power BI Desktop
+        ↓
+    Dashboard Interativo
+        ↓
+    Power BI Service (Publicação)
+</code></pre></div>
+<h3 id="configuracao-de-conexao">Configuração de Conexão</h3>
+<h4 id="1-conexao-ao-postgresql">1. Conexão ao PostgreSQL</h4>
+<p><strong>Credenciais:</strong>
+- <strong>Host:</strong> localhost (ou IP do container Docker)
+- <strong>Porta:</strong> 5432
+- <strong>Database:</strong> airline_delays
+- <strong>Schema:</strong> silver
+- <strong>Tabela:</strong> airline_delays
+- <strong>Usuário:</strong> postgres
+- <strong>Senha:</strong> postgres</p>
+<p><strong>String de Conexão:</strong>
+<div class="highlight"><pre><span></span><code>Server=localhost;Database=airline_delays;UID=postgres;PWD=postgres
+</code></pre></div></p>
+<h4 id="2-importacao-de-dados">2. Importação de Dados</h4>
+<p><strong>Modo recomendado:</strong> Import (para melhor performance)
+<strong>Alternativa:</strong> DirectQuery (para dados em tempo real)</p>
+<p><strong>Query SQL:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">,</span>
+<span class="w">    </span><span class="n">carrier</span><span class="p">,</span><span class="w"> </span><span class="n">carrier_name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">airport</span><span class="p">,</span><span class="w"> </span><span class="n">airport_name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">arr_flights</span><span class="p">,</span><span class="w"> </span><span class="n">arr_del15</span><span class="p">,</span>
+<span class="w">    </span><span class="n">carrier_ct</span><span class="p">,</span><span class="w"> </span><span class="n">weather_ct</span><span class="p">,</span><span class="w"> </span><span class="n">nas_ct</span><span class="p">,</span><span class="w"> </span><span class="n">security_ct</span><span class="p">,</span><span class="w"> </span><span class="n">late_aircraft_ct</span><span class="p">,</span>
+<span class="w">    </span><span class="n">arr_cancelled</span><span class="p">,</span><span class="w"> </span><span class="n">arr_diverted</span><span class="p">,</span>
+<span class="w">    </span><span class="n">arr_delay</span><span class="p">,</span><span class="w"> </span><span class="n">carrier_delay</span><span class="p">,</span><span class="w"> </span><span class="n">weather_delay</span><span class="p">,</span><span class="w"> </span><span class="n">nas_delay</span><span class="p">,</span><span class="w"> </span><span class="n">security_delay</span><span class="p">,</span><span class="w"> </span><span class="n">late_aircraft_delay</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">silver</span><span class="p">.</span><span class="n">airline_delays</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">,</span><span class="w"> </span><span class="n">carrier</span><span class="p">,</span><span class="w"> </span><span class="n">airport</span>
+</code></pre></div></p>
+<h3 id="estrutura-do-dashboard">Estrutura do Dashboard</h3>
+<h4 id="pagina-1-visao-geral-overview">Página 1: Visão Geral (Overview)</h4>
+<p><strong>KPIs Principais:</strong>
+- 📊 Total de Voos
+- ⏱️ Atraso Médio (minutos)
+- 🚫 Taxa de Cancelamento (%)
+- ✈️ Taxa de Pontualidade (%)</p>
+<p><strong>Visualizações:</strong>
+1. <strong>Card de Métricas</strong> - KPIs principais
+2. <strong>Gráfico de Linha</strong> - Tendência temporal de atrasos
+3. <strong>Mapa</strong> - Distribuição geográfica por aeroporto
+4. <strong>Gráfico de Barras</strong> - Top 10 aeroportos com mais atrasos</p>
+<p><strong>Filtros:</strong>
+- Seletor de ano
+- Seletor de mês
+- Seletor de companhia aérea</p>
+<h4 id="pagina-2-analise-por-companhia-aerea">Página 2: Análise por Companhia Aérea</h4>
+<p><strong>Visualizações:</strong>
+1. <strong>Tabela</strong> - Ranking de companhias por performance
+2. <strong>Gráfico de Barras Horizontais</strong> - Atraso médio por companhia
+3. <strong>Gráfico de Dispersão</strong> - Relação entre volume de voos e atrasos
+4. <strong>Treemap</strong> - Participação de mercado</p>
+<p><strong>Métricas:</strong>
+- Volume de voos por companhia
+- Atraso médio por companhia
+- Taxa de cancelamento por companhia
+- Evolução temporal</p>
+<h4 id="pagina-3-causas-de-atrasos">Página 3: Causas de Atrasos</h4>
+<p><strong>Visualizações:</strong>
+1. <strong>Gráfico de Pizza</strong> - Distribuição das causas de atraso
+2. <strong>Gráfico de Barras Empilhadas</strong> - Causas por mês
+3. <strong>Gráfico de Área</strong> - Evolução temporal das causas
+4. <strong>Matriz</strong> - Causas × Companhias</p>
+<p><strong>Categorias:</strong>
+- 🏢 Companhia Aérea (carrier_delay)
+- 🌦️ Meteorologia (weather_delay)
+- 🛫 NAS - Sistema Nacional (nas_delay)
+- 🔒 Segurança (security_delay)
+- ✈️ Aeronave Atrasada (late_aircraft_delay)</p>
+<h4 id="pagina-4-analise-temporal-e-sazonalidade">Página 4: Análise Temporal e Sazonalidade</h4>
+<p><strong>Visualizações:</strong>
+1. <strong>Gráfico de Linhas Múltiplas</strong> - Comparação ano a ano
+2. <strong>Heatmap Calendário</strong> - Atrasos por dia/mês
+3. <strong>Gráfico de Barras</strong> - Sazonalidade mensal
+4. <strong>Decomposição</strong> - Tendência, sazonalidade, resíduo</p>
+<p><strong>Insights:</strong>
+- Meses com mais atrasos
+- Padrões sazonais
+- Tendências de longo prazo</p>
+<h4 id="pagina-5-analise-por-aeroporto">Página 5: Análise por Aeroporto</h4>
+<p><strong>Visualizações:</strong>
+1. <strong>Tabela Interativa</strong> - Detalhes por aeroporto
+2. <strong>Mapa Interativo</strong> - Localização e tamanho por volume
+3. <strong>Gráfico de Barras</strong> - Top/Bottom aeroportos
+4. <strong>Cartões</strong> - Estatísticas do aeroporto selecionado</p>
+<p><strong>Filtros Dinâmicos:</strong>
+- Busca de aeroporto
+- Filtro por região/estado
+- Filtro por volume de operações</p>
+<h3 id="medidas-dax-criadas">Medidas DAX Criadas</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Taxa de Atraso</span>
+Taxa de Atraso = 
+<span class="nf">DIVIDE</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">airline_delays[arr_del15]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">airline_delays[arr_flights]</span><span class="p">),</span>
+<span class="w">    </span><span class="m">0</span>
+<span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span>
+
+<span class="c1">-- Atraso Médio</span>
+Atraso Médio = 
+<span class="nf">DIVIDE</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">airline_delays[arr_delay]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">airline_delays[arr_flights]</span><span class="p">),</span>
+<span class="w">    </span><span class="m">0</span>
+<span class="p">)</span>
+
+<span class="c1">-- Taxa de Pontualidade</span>
+Taxa de Pontualidade = 100 - [Taxa de Atraso]
+
+<span class="c1">-- Taxa de Cancelamento</span>
+Taxa de Cancelamento = 
+<span class="nf">DIVIDE</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">airline_delays[arr_cancelled]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">airline_delays[arr_flights]</span><span class="p">),</span>
+<span class="w">    </span><span class="m">0</span>
+<span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span>
+
+<span class="c1">-- Total de Voos</span>
+Total de Voos = SUM(airline_delays[arr_flights])
+
+<span class="c1">-- Causa Principal</span>
+Causa Principal = 
+<span class="nb">VAR</span><span class="w"> </span>MaxDelay = 
+<span class="w">    </span><span class="nf">MAX</span><span class="p">(</span>
+<span class="w">        </span><span class="na">airline_delays[carrier_delay]</span><span class="p">,</span>
+<span class="w">        </span><span class="na">airline_delays[weather_delay]</span><span class="p">,</span>
+<span class="w">        </span><span class="na">airline_delays[nas_delay]</span><span class="p">,</span>
+<span class="w">        </span><span class="na">airline_delays[security_delay]</span><span class="p">,</span>
+<span class="w">        </span><span class="na">airline_delays[late_aircraft_delay]</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="nb">RETURN</span>
+<span class="w">    </span><span class="nf">SWITCH</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">TRUE</span><span class="p">(),</span>
+<span class="w">        </span>MaxDelay = airline_delays[carrier_delay], &quot;Companhia&quot;,
+<span class="w">        </span>MaxDelay = airline_delays[weather_delay], &quot;Meteorologia&quot;,
+<span class="w">        </span>MaxDelay = airline_delays[nas_delay], &quot;NAS&quot;,
+<span class="w">        </span>MaxDelay = airline_delays[security_delay], &quot;Segurança&quot;,
+<span class="w">        </span>MaxDelay = airline_delays[late_aircraft_delay], &quot;Aeronave Atrasada&quot;,
+<span class="w">        </span><span class="s">&quot;N/A&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="c1">-- Ranking de Companhias</span>
+Rank Companhia = 
+<span class="nf">RANKX</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">ALL</span><span class="p">(</span><span class="na">airline_delays[carrier_name]</span><span class="p">),</span>
+<span class="w">    </span><span class="na">[Atraso Médio]</span><span class="p">,</span>
+<span class="w">    </span><span class="p">,</span>
+<span class="w">    </span><span class="nb">DESC</span><span class="p">,</span>
+<span class="w">    </span>DENSE
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="tabelas-calculadas">Tabelas Calculadas</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Calendário</span>
+Calendário = 
+<span class="nf">CALENDAR</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">DATE</span><span class="p">(</span><span class="nf">MIN</span><span class="p">(</span><span class="na">airline_delays[year]</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">DATE</span><span class="p">(</span><span class="nf">MAX</span><span class="p">(</span><span class="na">airline_delays[year]</span><span class="p">),</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="m">31</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Dimensão de Causas</span>
+Dim_Causas = 
+<span class="nf">DATATABLE</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;Causa&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Cor&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Companhia&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#FF6B6B&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Meteorologia&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#4ECDC4&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;NAS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#45B7D1&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Segurança&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#FFA07A&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Aeronave Atrasada&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#98D8C8&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="formatacao-e-design">Formatação e Design</h3>
+<p><strong>Tema de Cores:</strong>
+- Primária: Azul Aviação (#0078D4)
+- Secundária: Cinza Escuro (#424242)
+- Destaque: Laranja (#FF8C00)
+- Sucesso: Verde (#28A745)
+- Alerta: Vermelho (#DC3545)</p>
+<p><strong>Fontes:</strong>
+- Títulos: Segoe UI Bold, 18pt
+- Subtítulos: Segoe UI Semibold, 14pt
+- Texto: Segoe UI, 11pt</p>
+<p><strong>Layout:</strong>
+- Grid 12 colunas
+- Espaçamento consistente
+- Navegação por botões
+- Tooltips informativos</p>
+<h3 id="interatividade">Interatividade</h3>
+<p><strong>Recursos Implementados:</strong>
+- ✅ Cross-filtering entre visuais
+- ✅ Drill-down em hierarquias (Ano → Mês → Dia)
+- ✅ Tooltips personalizados com métricas adicionais
+- ✅ Botões de navegação entre páginas
+- ✅ Bookmark para cenários salvos
+- ✅ Filtros sincronizados entre páginas</p>
+<h3 id="performance-e-otimizacao">Performance e Otimização</h3>
+<p><strong>Técnicas Aplicadas:</strong>
+1. <strong>Agregações</strong> - Pré-cálculo de somas e médias
+2. <strong>Relacionamentos Otimizados</strong> - Star schema
+3. <strong>Medidas Eficientes</strong> - DAX otimizado
+4. <strong>Redução de Cardinalidade</strong> - Filtros aplicados na importação
+5. <strong>Visualizações Leves</strong> - Limitação de pontos de dados</p>
+<h3 id="publicacao">Publicação</h3>
+<p><strong>Power BI Service:</strong>
+1. Publicar no workspace
+2. Configurar gateway (se necessário)
+3. Agendar refresh automático
+4. Compartilhar com stakeholders
+5. Configurar permissões</p>
+<p><strong>Refresh Schedule:</strong>
+- Frequência: Diária
+- Horário: 06:00 AM
+- Fuso horário: America/Sao_Paulo</p>
+<h3 id="documentacao-do-dashboard">Documentação do Dashboard</h3>
+<p><strong>Manual do Usuário:</strong>
+1. Como navegar entre páginas
+2. Como usar filtros
+3. Interpretação de métricas
+4. Glossário de termos</p>
+<p><strong>Guia de Manutenção:</strong>
+1. Como atualizar dados
+2. Como modificar medidas
+3. Como adicionar novas visualizações
+4. Troubleshooting comum</p>
+<h3 id="metricas-de-sucesso">Métricas de Sucesso</h3>
+<ul>
+<li>✅ Dashboard carrega em &lt; 5 segundos</li>
+<li>✅ Todas as visualizações são interativas</li>
+<li>✅ Dados atualizados automaticamente</li>
+<li>✅ Mobile-friendly (responsive)</li>
+<li>✅ Acessível a todos os stakeholders</li>
+</ul>
+<h3 id="proximos-passos">Próximos Passos</h3>
+<ol>
+<li>📱 Versão mobile otimizada</li>
+<li>🤖 Integração com Q&amp;A (IA do Power BI)</li>
+<li>📊 Análise preditiva (forecasting)</li>
+<li>🔔 Alertas automáticos por email</li>
+<li>🌐 Embed em portal corporativo</li>
+</ol>
+<h3 id="links-uteis">Links Úteis</h3>
+<ul>
+<li><strong>Dashboard</strong>: [Link será adicionado após publicação]</li>
+<li><strong>Documentação Power BI</strong>: <a href="https://learn.microsoft.com/power-bi/">Microsoft Learn</a></li>
+<li><strong>Repositório</strong>: <a href="https://github.com/FelipeFreire-gf/SBD2-Austin-Airbnb">GitHub</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.instant", "navigation.top", "navigation.tracking"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

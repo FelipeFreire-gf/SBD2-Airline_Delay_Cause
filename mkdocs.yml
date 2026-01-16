@@ -1,8 +1,8 @@
-site_name: Power Bi Air bnb de Austin Texas
+site_name: Análise de Atrasos de Voos em Aeroportos
 
 repo_url: https://github.com/FelipeFreire-gf/SBD2-Austin-Airbnb
-repo_name: 2025.4-austinBnb
-site_description: "Documentação da Análise de Dados do Air bnb de Austin Texas"
+repo_name: 2025.4-airline-delays
+site_description: "Documentação do Projeto de Análise de Atrasos de Voos em Aeroportos dos Estados Unidos"
 
 nav:
   - Home: index.md
@@ -47,7 +47,7 @@ theme:
         name: Mude para o tema claro
 
   
-  logo: assets/shawR2I.ico
+  logo: assets/logo.png
   favicon: assets/shawR2.png
   highlightjs: true
 
