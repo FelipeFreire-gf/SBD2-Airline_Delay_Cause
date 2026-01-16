@@ -2,14 +2,14 @@
 
 Esta é a documentação oficial do projeto de **Análise de Atrasos de Voos em Aeroportos dos Estados Unidos** desenvolvido pelo **Grupo 04** na disciplina de Banco de Dados 2 da **UnB**. Aqui você encontrará toda a documentação técnica, modelagens, análises e guias de desenvolvimento.
 
-## 📋 Estrutura do Projeto
+## Estrutura do Projeto
 
-* **📚 Entrega 0 - Base de Dados**: Coleta e armazenamento dos dados brutos (Camada Bronze)
-* **🔄 Entrega 1 - Raw → Silver**: Pipeline ETL, limpeza e carga no PostgreSQL
-* **📊 Entrega 2 - Gold Layer**: Agregações, métricas e visualizações analíticas
-* **📈 Entrega 3 - Power BI**: Dashboard interativo e publicação
+* **Entrega 0 - Base de Dados**: Coleta e armazenamento dos dados brutos (Camada Bronze)
+* **Entrega 1 - Raw → Silver**: Pipeline ETL, limpeza e carga no PostgreSQL
+* **Entrega 2 - Gold Layer**: Agregações, métricas e visualizações analíticas
+* **Entrega 3 - Power BI**: Dashboard interativo e publicação
 
-## 🗂️ Sobre o Dataset
+## Sobre o Dataset
 
 **Dataset**: [Airline Delay and Cancellation Data (2013-2023)](https://www.kaggle.com/datasets/sriharshaeedala/airline-delay)  
 **Fonte**: Bureau of Transportation Statistics (BTS) - U.S. Government  
@@ -20,11 +20,11 @@ Esta é a documentação oficial do projeto de **Análise de Atrasos de Voos em 
 
 O dataset oferece insights detalhados sobre a performance operacional de companhias aéreas americanas em diversos aeroportos durante 10 anos. Permite análises de:
 
-- ✈️ **Performance de Companhias**: Pontualidade, cancelamentos e eficiência operacional
-- 📊 **Tendências Temporais**: Padrões sazonais, evolução anual e períodos críticos
-- 🔍 **Análise de Causa-Raiz**: Identificação dos principais fatores de atrasos
-- 📈 **Benchmarking**: Comparação entre carriers e aeroportos
-- 🤖 **Modelagem Preditiva**: Previsão de atrasos e estratégias de mitigação
+- **Performance de Companhias**: Pontualidade, cancelamentos e eficiência operacional
+- **Tendências Temporais**: Padrões sazonais, evolução anual e períodos críticos
+- **Análise de Causa-Raiz**: Identificação dos principais fatores de atrasos
+- **Benchmarking**: Comparação entre carriers e aeroportos
+- **Modelagem Preditiva**: Previsão de atrasos e estratégias de mitigação
 
 ### Estrutura dos Dados (21 Colunas)
 
@@ -54,15 +54,15 @@ O dataset oferece insights detalhados sobre a performance operacional de companh
 - `security_delay` - Tempo atribuído à segurança
 - `late_aircraft_delay` - Tempo atribuído a aeronave atrasada
 
-## 🏗️ Arquitetura do Projeto
+## Arquitetura do Projeto
 
 **Arquitetura Medallion (Lakehouse)**
 
-- **🥉 Bronze (Raw)**: Dados brutos do Kaggle sem transformações
-- **🥈 Silver (Curated)**: Dados limpos, normalizados e armazenados no PostgreSQL
-- **🥇 Gold (Aggregated)**: Métricas agregadas, KPIs e visualizações analíticas
+- **Bronze (Raw)**: Dados brutos do Kaggle sem transformações
+- **Silver (Curated)**: Dados limpos, normalizados e armazenados no PostgreSQL
+- **Gold (Aggregated)**: Métricas agregadas, KPIs e visualizações analíticas
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **Processamento**: PySpark, Pandas, NumPy
 - **Banco de Dados**: PostgreSQL (v15) com psycopg2-binary

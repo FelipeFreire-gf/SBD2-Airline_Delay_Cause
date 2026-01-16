@@ -90,12 +90,12 @@ O dataset possui **formato tabular** com **21 colunas** organizadas por combina�
 
 Este dataset permite realizar:
 
-✈️ **Análise de Performance**: Avaliar pontualidade de companhias em aeroportos específicos  
-📊 **Identificação de Tendências**: Descobrir padrões sazonais e períodos críticos  
-🔍 **Análise de Causa-Raiz**: Investigar os principais fatores de atrasos  
-📈 **Benchmarking**: Comparar performance entre companhias e aeroportos  
-🤖 **Modelagem Preditiva**: Desenvolver modelos de previsão de atrasos  
-💡 **Insights Estratégicos**: Informar decisões operacionais e estratégias de mitigação
+**Análise de Performance**: Avaliar pontualidade de companhias em aeroportos específicos  
+**Identificação de Tendências**: Descobrir padrões sazonais e períodos críticos  
+**Análise de Causa-Raiz**: Investigar os principais fatores de atrasos  
+**Benchmarking**: Comparar performance entre companhias e aeroportos  
+**Modelagem Preditiva**: Desenvolver modelos de previsão de atrasos  
+**Insights Estratégicos**: Informar decisões operacionais e estratégias de mitigação
 
 Para mais detalhes veja a documentação:
 
@@ -116,27 +116,27 @@ A documentação completa inclui:
 
 **Páginas e Features Planejadas:**
 
-📊 **Overview (KPIs Principais)**
+**Overview (KPIs Principais)**
 - Total de voos, taxa de atrasos ≥15min, cancelamentos e desvios
 - Performance geral do setor aéreo (2013-2023)
 - Principais métricas comparativas
 
-✈️ **Análise por Companhia Aérea**
+**Análise por Companhia Aérea**
 - Ranking de performance (pontualidade, cancelamentos)
 - Comparativo entre carriers (benchmarking)
 - Volume operacional vs. eficiência
 
-🔍 **Análise de Causas de Atrasos**
+**Análise de Causas de Atrasos**
 - Breakdown das 5 causas (Carrier, Weather, NAS, Security, Late Aircraft)
 - Contribuição relativa e absoluta de cada fator
 - Análise de causa-raiz por companhia e aeroporto
 
-📈 **Análise Temporal e Sazonalidade**
+**Análise Temporal e Sazonalidade**
 - Tendências anuais e mensais
 - Padrões sazonais e períodos críticos
 - Evolução histórica da performance
 
-🌍 **Análise por Aeroporto**
+**Análise por Aeroporto**
 - Performance dos principais hubs
 - Comparativo geográfico
 - Aeroportos mais afetados por cada tipo de atraso
