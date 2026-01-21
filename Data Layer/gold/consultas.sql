@@ -5,14 +5,15 @@
 -- ============================================================================
 
 -- ============================================================================
--- 1. VERIFICAÇÃO DO SCHEMA GOLD
+-- 1. VERIFICAÇÃO DO SCHEMA DW
 -- ============================================================================
--- Verificar contagem de registros em cada tabela
 SELECT 'dim_carrier' AS tabela, COUNT(*) AS linhas FROM dw.dim_carrier
 UNION ALL
 SELECT 'dim_airport' AS tabela, COUNT(*) AS linhas FROM dw.dim_airport
 UNION ALL
 SELECT 'dim_time' AS tabela, COUNT(*) AS linhas FROM dw.dim_time
+UNION ALL
+SELECT 'dim_delay_cause' AS tabela, COUNT(*) AS linhas FROM dw.dim_delay_cause
 UNION ALL
 SELECT 'fact_flight_delays' AS tabela, COUNT(*) AS linhas FROM dw.fact_flight_delays
 ORDER BY tabela;
@@ -32,7 +33,7 @@ WITH carrier_stats AS (
         AVG(f.avg_delay_minutes) AS atraso_medio_minutos,
         SUM(f.arr_cancelled) AS total_cancelamentos
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_carrier c ON f.carrier_srk = c.carrier_key
+    JOIN dw.dim_carrier c ON f.carrier_srk = c.carrier_srk
     GROUP BY c.carrier_code, c.carrier_name
     HAVING SUM(f.arr_flights) >= 1000  -- Apenas carriers com volume significativo
 )
@@ -66,7 +67,7 @@ WITH airport_stats AS (
         SUM(f.arr_diverted) AS total_desvios,
         AVG(f.diversion_rate) AS taxa_desvio_pct
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_airport a ON f.airport_srk = a.airport_key
+    JOIN dw.dim_airport a ON f.airport_srk = a.airport_srk
     GROUP BY a.airport_code, a.airport_name
     HAVING SUM(f.arr_flights) >= 500
 )
@@ -97,11 +98,12 @@ WITH monthly_aggregation AS (
         AVG(f.delay_rate) AS taxa_atraso_media,
         AVG(f.avg_delay_minutes) AS atraso_medio_minutos,
         SUM(f.arr_cancelled) AS total_cancelamentos,
-        SUM(f.weather_ct) AS incidentes_meteorologicos,
-        SUM(f.carrier_ct) AS incidentes_companhia,
-        SUM(f.nas_ct) AS incidentes_nas
+        SUM(CASE WHEN dc.delay_cause_code = 'WEATHER' THEN f.delay_count ELSE 0 END) AS incidentes_meteorologicos,
+        SUM(CASE WHEN dc.delay_cause_code = 'CARRIER' THEN f.delay_count ELSE 0 END) AS incidentes_companhia,
+        SUM(CASE WHEN dc.delay_cause_code = 'NAS' THEN f.delay_count ELSE 0 END) AS incidentes_nas
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_time t ON f.time_srk = t.time_key
+    JOIN dw.dim_time t ON f.time_srk = t.time_srk
+    JOIN dw.dim_delay_cause dc ON f.delay_cause_srk = dc.delay_cause_srk
     GROUP BY t.month
 )
 SELECT
@@ -146,7 +148,7 @@ WITH yearly_performance AS (
         SUM(f.arr_cancelled) AS total_cancelamentos,
         SUM(f.arr_diverted) AS total_desvios
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_time t ON f.time_srk = t.time_key
+    JOIN dw.dim_time t ON f.time_srk = t.time_srk
     GROUP BY t.year
 )
 SELECT
@@ -165,46 +167,25 @@ ORDER BY year;
 -- ============================================================================
 -- 6. ANÁLISE DE CAUSAS DE ATRASOS - BREAKDOWN PERCENTUAL
 -- ============================================================================
--- Objetivo: Determinar a contribuição de cada causa no tempo total de atraso
 WITH causa_totais AS (
     SELECT
-        SUM(carrier_delay) AS total_carrier,
-        SUM(weather_delay) AS total_weather,
-        SUM(nas_delay) AS total_nas,
-        SUM(security_delay) AS total_security,
-        SUM(late_aircraft_delay) AS total_late_aircraft,
-        SUM(arr_delay) AS total_geral
-    FROM dw.fact_flight_delays
+        dc.delay_cause_name AS causa,
+        SUM(f.delay_minutes) AS tempo_total_minutos,
+        SUM(f.delay_count) AS contagem_incidentes
+    FROM dw.fact_flight_delays f
+    JOIN dw.dim_delay_cause dc ON f.delay_cause_srk = dc.delay_cause_srk
+    GROUP BY dc.delay_cause_name, dc.delay_cause_srk
+),
+total_geral AS (
+    SELECT SUM(tempo_total_minutos) AS total FROM causa_totais
 )
 SELECT
-    'Companhia Aérea' AS causa,
-    total_carrier AS tempo_total_minutos,
-    ROUND(100.0 * total_carrier / NULLIF(total_geral, 0), 2) AS percentual_contribuicao
+    causa,
+    tempo_total_minutos,
+    contagem_incidentes,
+    ROUND(100.0 * tempo_total_minutos / NULLIF(tg.total, 0), 2) AS percentual_contribuicao
 FROM causa_totais
-UNION ALL
-SELECT
-    'Meteorologia' AS causa,
-    total_weather AS tempo_total_minutos,
-    ROUND(100.0 * total_weather / NULLIF(total_geral, 0), 2) AS percentual_contribuicao
-FROM causa_totais
-UNION ALL
-SELECT
-    'NAS (Sistema Nacional)' AS causa,
-    total_nas AS tempo_total_minutos,
-    ROUND(100.0 * total_nas / NULLIF(total_geral, 0), 2) AS percentual_contribuicao
-FROM causa_totais
-UNION ALL
-SELECT
-    'Segurança' AS causa,
-    total_security AS tempo_total_minutos,
-    ROUND(100.0 * total_security / NULLIF(total_geral, 0), 2) AS percentual_contribuicao
-FROM causa_totais
-UNION ALL
-SELECT
-    'Aeronave Atrasada' AS causa,
-    total_late_aircraft AS tempo_total_minutos,
-    ROUND(100.0 * total_late_aircraft / NULLIF(total_geral, 0), 2) AS percentual_contribuicao
-FROM causa_totais
+CROSS JOIN total_geral tg
 ORDER BY tempo_total_minutos DESC;
 
 -- ============================================================================
@@ -214,12 +195,14 @@ ORDER BY tempo_total_minutos DESC;
 WITH weather_impact_monthly AS (
     SELECT
         t.month,
-        SUM(f.weather_ct) AS total_incidentes_clima,
-        SUM(f.weather_delay) AS total_minutos_clima,
-        AVG(f.weather_delay) AS media_minutos_por_registro,
+        SUM(f.delay_count) AS total_incidentes_clima,
+        SUM(f.delay_minutes) AS total_minutos_clima,
+        AVG(f.delay_minutes) AS media_minutos_por_registro,
         SUM(f.arr_flights) AS total_voos
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_time t ON f.time_srk = t.time_key
+    JOIN dw.dim_time t ON f.time_srk = t.time_srk
+    JOIN dw.dim_delay_cause dc ON f.delay_cause_srk = dc.delay_cause_srk
+    WHERE dc.delay_cause_code = 'WEATHER'
     GROUP BY t.month
 )
 SELECT
@@ -243,16 +226,16 @@ ORDER BY total_minutos_clima DESC;
 -- ============================================================================
 -- Objetivo: Identificar combinações críticas carrier-aeroporto
 WITH top_carriers AS (
-    SELECT carrier_key
+    SELECT carrier_srk
     FROM dw.fact_flight_delays
-    GROUP BY carrier_key
+    GROUP BY carrier_srk
     ORDER BY SUM(arr_flights) DESC
     LIMIT 10
 ),
 top_airports AS (
-    SELECT airport_key
+    SELECT airport_srk
     FROM dw.fact_flight_delays
-    GROUP BY airport_key
+    GROUP BY airport_srk
     ORDER BY SUM(arr_flights) DESC
     LIMIT 10
 )
@@ -264,10 +247,10 @@ SELECT
     ROUND(AVG(f.avg_delay_minutes), 2) AS atraso_medio_minutos,
     ROUND(AVG(f.on_time_rate), 2) AS taxa_pontualidade_pct
 FROM dw.fact_flight_delays f
-JOIN dw.dim_carrier c ON f.carrier_srk = c.carrier_key
-JOIN dw.dim_airport a ON f.airport_srk = a.airport_key
-WHERE f.carrier_srk IN (SELECT carrier_key FROM top_carriers)
-  AND f.airport_srk IN (SELECT airport_key FROM top_airports)
+JOIN dw.dim_carrier c ON f.carrier_srk = c.carrier_srk
+JOIN dw.dim_airport a ON f.airport_srk = a.airport_srk
+WHERE f.carrier_srk IN (SELECT carrier_srk FROM top_carriers)
+  AND f.airport_srk IN (SELECT airport_srk FROM top_airports)
 GROUP BY c.carrier_name, a.airport_name
 ORDER BY c.carrier_name, a.airport_name;
 
@@ -284,13 +267,14 @@ WITH quarterly_stats AS (
         AVG(f.delay_rate) AS taxa_atraso_pct,
         AVG(f.avg_delay_minutes) AS atraso_medio_minutos,
         SUM(f.arr_cancelled) AS total_cancelamentos,
-        SUM(f.carrier_delay) AS total_carrier_delay,
-        SUM(f.weather_delay) AS total_weather_delay,
-        SUM(f.nas_delay) AS total_nas_delay,
-        SUM(f.security_delay) AS total_security_delay,
-        SUM(f.late_aircraft_delay) AS total_late_aircraft_delay
+        SUM(CASE WHEN dc.delay_cause_code = 'CARRIER' THEN f.delay_minutes ELSE 0 END) AS total_carrier_delay,
+        SUM(CASE WHEN dc.delay_cause_code = 'WEATHER' THEN f.delay_minutes ELSE 0 END) AS total_weather_delay,
+        SUM(CASE WHEN dc.delay_cause_code = 'NAS' THEN f.delay_minutes ELSE 0 END) AS total_nas_delay,
+        SUM(CASE WHEN dc.delay_cause_code = 'SECURITY' THEN f.delay_minutes ELSE 0 END) AS total_security_delay,
+        SUM(CASE WHEN dc.delay_cause_code = 'LATE_AIRCRAFT' THEN f.delay_minutes ELSE 0 END) AS total_late_aircraft_delay
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_time t ON f.time_srk = t.time_key
+    JOIN dw.dim_time t ON f.time_srk = t.time_srk
+    JOIN dw.dim_delay_cause dc ON f.delay_cause_srk = dc.delay_cause_srk
     GROUP BY t.ano_trimestre, t.trimestre
 )
 SELECT
@@ -324,7 +308,7 @@ WITH airport_performance AS (
         AVG(f.delay_rate) AS taxa_atraso_pct,
         AVG(f.avg_delay_minutes) AS atraso_medio_minutos
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_airport a ON f.airport_srk = a.airport_key
+    JOIN dw.dim_airport a ON f.airport_srk = a.airport_srk
     GROUP BY a.airport_code, a.airport_name
 ),
 percentiles AS (
@@ -361,7 +345,7 @@ WITH agregacao_mensal AS (
         SUM(f.arr_flights) AS total_voos,
         ROUND(AVG(f.delay_rate), 2) AS taxa_atraso
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_time t ON f.time_srk = t.time_key
+    JOIN dw.dim_time t ON f.time_srk = t.time_srk
     GROUP BY t.year, t.month, t.mes_ano
 ),
 ranked AS (
@@ -392,56 +376,31 @@ ORDER BY year;
 -- Objetivo: Identificar qual carrier é o melhor em cada tipo de problema
 WITH carrier_causas AS (
     SELECT
-        c.carrier_code,
         c.carrier_name,
-        SUM(f.carrier_delay) AS total_carrier_delay,
-        SUM(f.weather_delay) AS total_weather_delay,
-        SUM(f.nas_delay) AS total_nas_delay,
-        SUM(f.security_delay) AS total_security_delay,
-        SUM(f.late_aircraft_delay) AS total_late_aircraft_delay,
+        dc.delay_cause_name,
+        SUM(f.delay_minutes) AS total_delay_minutes,
         SUM(f.arr_flights) AS total_voos
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_carrier c ON f.carrier_srk = c.carrier_key
-    GROUP BY c.carrier_code, c.carrier_name
+    JOIN dw.dim_carrier c ON f.carrier_srk = c.carrier_srk
+    JOIN dw.dim_delay_cause dc ON f.delay_cause_srk = dc.delay_cause_srk
+    GROUP BY c.carrier_name, dc.delay_cause_name
     HAVING SUM(f.arr_flights) >= 1000
+),
+ranked AS (
+    SELECT
+        delay_cause_name,
+        carrier_name,
+        ROUND(total_delay_minutes / NULLIF(total_voos, 0), 2) AS minutos_por_voo,
+        ROW_NUMBER() OVER (PARTITION BY delay_cause_name ORDER BY total_delay_minutes / NULLIF(total_voos, 0) ASC) AS rank
+    FROM carrier_causas
 )
 SELECT
-    'Menor Atraso - Companhia' AS categoria,
+    delay_cause_name AS categoria,
     carrier_name,
-    ROUND(total_carrier_delay / NULLIF(total_voos, 0), 2) AS minutos_por_voo
-FROM carrier_causas
-ORDER BY minutos_por_voo ASC
-LIMIT 1
-
-UNION ALL
-
-SELECT
-    'Menor Atraso - Meteorologia' AS categoria,
-    carrier_name,
-    ROUND(total_weather_delay / NULLIF(total_voos, 0), 2) AS minutos_por_voo
-FROM carrier_causas
-ORDER BY minutos_por_voo ASC
-LIMIT 1
-
-UNION ALL
-
-SELECT
-    'Menor Atraso - NAS' AS categoria,
-    carrier_name,
-    ROUND(total_nas_delay / NULLIF(total_voos, 0), 2) AS minutos_por_voo
-FROM carrier_causas
-ORDER BY minutos_por_voo ASC
-LIMIT 1
-
-UNION ALL
-
-SELECT
-    'Menor Atraso - Aeronave' AS categoria,
-    carrier_name,
-    ROUND(total_late_aircraft_delay / NULLIF(total_voos, 0), 2) AS minutos_por_voo
-FROM carrier_causas
-ORDER BY minutos_por_voo ASC
-LIMIT 1;
+    minutos_por_voo
+FROM ranked
+WHERE rank = 1
+ORDER BY delay_cause_name;
 
 -- ============================================================================
 -- 13. COMPARAÇÃO ANTES/DEPOIS PANDEMIA (2020)
@@ -460,7 +419,7 @@ WITH pandemic_periods AS (
         AVG(f.avg_delay_minutes) AS atraso_medio_minutos,
         SUM(f.arr_cancelled) AS total_cancelamentos
     FROM dw.fact_flight_delays f
-    JOIN dw.dim_time t ON f.time_srk = t.time_key
+    JOIN dw.dim_time t ON f.time_srk = t.time_srk
     GROUP BY 
         CASE 
             WHEN t.year < 2020 THEN 'Pré-Pandemia (2013-2019)'
