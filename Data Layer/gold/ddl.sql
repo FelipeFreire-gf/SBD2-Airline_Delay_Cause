@@ -11,7 +11,7 @@ CREATE SCHEMA dw;
 -- DIMENSION 1: COMPANHIA AÉREA (CARRIER)
 -- ============================================================================
 CREATE TABLE dw.dim_carrier (
-    carrier_srk SERIAL PRIMARY KEY,
+    srk_carrier SERIAL PRIMARY KEY,
     carrier_code VARCHAR(10) UNIQUE NOT NULL,
     carrier_name VARCHAR(200),
     data_atualizacao TIMESTAMP DEFAULT NOW()
@@ -21,7 +21,7 @@ CREATE TABLE dw.dim_carrier (
 -- DIMENSION 2: AEROPORTO
 -- ============================================================================
 CREATE TABLE dw.dim_airport (
-    airport_srk SERIAL PRIMARY KEY,
+    srk_airport SERIAL PRIMARY KEY,
     airport_code VARCHAR(10) UNIQUE NOT NULL,
     airport_name VARCHAR(200),
     data_atualizacao TIMESTAMP DEFAULT NOW()
@@ -31,7 +31,7 @@ CREATE TABLE dw.dim_airport (
 -- DIMENSION 3: TEMPO
 -- ============================================================================
 CREATE TABLE dw.dim_time (
-    time_srk SERIAL PRIMARY KEY,
+    srk_time SERIAL PRIMARY KEY,
     year INTEGER NOT NULL,
     month INTEGER NOT NULL,
     trimestre INTEGER,
@@ -43,36 +43,54 @@ CREATE TABLE dw.dim_time (
 );
 
 -- ============================================================================
--- DIMENSION 4: CAUSA DE ATRASO
--- ============================================================================
-CREATE TABLE dw.dim_delay_cause (
-    delay_cause_srk SERIAL PRIMARY KEY,
-    delay_cause_code VARCHAR(20) UNIQUE NOT NULL,
-    delay_cause_name VARCHAR(100) NOT NULL,
-    delay_cause_description VARCHAR(500)
-);
-
--- ============================================================================
 -- FACT TABLE: ATRASOS DE VOOS
 -- ============================================================================
 CREATE TABLE dw.fact_flight_delays (
-    carrier_srk INTEGER NOT NULL REFERENCES dw.dim_carrier(carrier_srk),
-    airport_srk INTEGER NOT NULL REFERENCES dw.dim_airport(airport_srk),
-    time_srk INTEGER NOT NULL REFERENCES dw.dim_time(time_srk),
-    delay_cause_srk INTEGER NOT NULL REFERENCES dw.dim_delay_cause(delay_cause_srk),
+    srk_fact SERIAL PRIMARY KEY,
+    srk_carrier INTEGER NOT NULL,
+    srk_airport INTEGER NOT NULL,
+    srk_time INTEGER NOT NULL,
+    
+    -- Atributos da camada Silver
+    year INTEGER NOT NULL,
+    month INTEGER NOT NULL,
+    carrier VARCHAR(10) NOT NULL,
+    carrier_name VARCHAR(200),
+    airport VARCHAR(10) NOT NULL,
+    airport_name VARCHAR(200),
+    
+    -- Métricas operacionais
     arr_flights DECIMAL(10,2),
     arr_del15 DECIMAL(10,2),
     arr_cancelled DECIMAL(10,2),
     arr_diverted DECIMAL(10,2),
-    delay_count DECIMAL(10,2),
-    delay_minutes DECIMAL(10,2),
     arr_delay DECIMAL(10,2),
+    
+    -- Contagem de atrasos por causa
+    carrier_ct DECIMAL(10,2),
+    weather_ct DECIMAL(10,2),
+    nas_ct DECIMAL(10,2),
+    security_ct DECIMAL(10,2),
+    late_aircraft_ct DECIMAL(10,2),
+    
+    -- Tempo de atraso por causa (minutos)
+    carrier_delay DECIMAL(10,2),
+    weather_delay DECIMAL(10,2),
+    nas_delay DECIMAL(10,2),
+    security_delay DECIMAL(10,2),
+    late_aircraft_delay DECIMAL(10,2),
+    
+    -- Métricas calculadas
     delay_rate DECIMAL(5,2),
     cancellation_rate DECIMAL(5,2),
     diversion_rate DECIMAL(5,2),
     avg_delay_minutes DECIMAL(10,2),
     on_time_rate DECIMAL(5,2),
-    PRIMARY KEY (carrier_srk, airport_srk, time_srk, delay_cause_srk)
+    
+    UNIQUE(srk_carrier, srk_airport, srk_time),
+    FOREIGN KEY (srk_carrier) REFERENCES dw.dim_carrier(srk_carrier),
+    FOREIGN KEY (srk_airport) REFERENCES dw.dim_airport(srk_airport),
+    FOREIGN KEY (srk_time) REFERENCES dw.dim_time(srk_time)
 );
 
 -- ============================================================================
