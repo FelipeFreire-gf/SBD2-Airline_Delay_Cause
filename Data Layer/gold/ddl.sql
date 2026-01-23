@@ -51,14 +51,6 @@ CREATE TABLE dw.fact_flight_delays (
     srk_airport INTEGER NOT NULL,
     srk_time INTEGER NOT NULL,
     
-    -- Atributos da camada Silver
-    year INTEGER NOT NULL,
-    month INTEGER NOT NULL,
-    carrier VARCHAR(10) NOT NULL,
-    carrier_name VARCHAR(200),
-    airport VARCHAR(10) NOT NULL,
-    airport_name VARCHAR(200),
-    
     -- Métricas operacionais
     arr_flights DECIMAL(10,2),
     arr_del15 DECIMAL(10,2),
