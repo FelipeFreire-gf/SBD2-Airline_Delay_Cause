@@ -8,8 +8,7 @@ CREATE SCHEMA dw;
 CREATE TABLE dw.dim_carrier (
     srk_carrier SERIAL PRIMARY KEY,
     carrier_code VARCHAR(10) UNIQUE NOT NULL,
-    carrier_name VARCHAR(200),
-    data_atualizacao TIMESTAMP DEFAULT NOW()
+    carrier_name VARCHAR(200)
 );
 
 
@@ -18,8 +17,7 @@ CREATE TABLE dw.dim_carrier (
 CREATE TABLE dw.dim_airport (
     srk_airport SERIAL PRIMARY KEY,
     airport_code VARCHAR(10) UNIQUE NOT NULL,
-    airport_name VARCHAR(200),
-    data_atualizacao TIMESTAMP DEFAULT NOW()
+    airport_name VARCHAR(200)
 );
 
 
