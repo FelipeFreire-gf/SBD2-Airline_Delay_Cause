@@ -5,75 +5,75 @@ CREATE SCHEMA dw;
 
 -- DIMENSION 1: COMPANHIA AÉREA (CARRIER)
 
-CREATE TABLE dw.dim_carrier (
-    srk_carrier SERIAL PRIMARY KEY,
-    carrier_code VARCHAR(10) UNIQUE NOT NULL,
-    carrier_name VARCHAR(200)
+CREATE TABLE dw.DIM_CRE (
+    SRK_CRE SERIAL PRIMARY KEY,
+    CRE_CDE VARCHAR(10) UNIQUE NOT NULL,
+    CRE_NME VARCHAR(200)
 );
 
 
 -- DIMENSION 2: AEROPORTO
 
-CREATE TABLE dw.dim_airport (
-    srk_airport SERIAL PRIMARY KEY,
-    airport_code VARCHAR(10) UNIQUE NOT NULL,
-    airport_name VARCHAR(200)
+CREATE TABLE dw.DIM_ARR (
+    SRK_ARR SERIAL PRIMARY KEY,
+    ARR_CDE VARCHAR(10) UNIQUE NOT NULL,
+    ARR_NME VARCHAR(200)
 );
 
 
 -- DIMENSION 3: TEMPO
 
-CREATE TABLE dw.dim_time (
-    srk_time SERIAL PRIMARY KEY,
-    year INTEGER NOT NULL,
-    month INTEGER NOT NULL,
-    trimestre INTEGER,
-    semestre INTEGER,
-    mes_nome VARCHAR(20),
-    mes_ano VARCHAR(7),
-    ano_trimestre VARCHAR(7),
-    UNIQUE(year, month)
+CREATE TABLE dw.DIM_TME (
+    SRK_TME SERIAL PRIMARY KEY,
+    YAR INTEGER NOT NULL,
+    MNH INTEGER NOT NULL,
+    TIS INTEGER,
+    SMT INTEGER,
+    MES_NME VARCHAR(20),
+    MES_ANO VARCHAR(7),
+    ANO_TIS VARCHAR(7),
+    UNIQUE(YAR, MNH)
 );
 
 
 -- FACT TABLE: ATRASOS DE VOOS
 
-CREATE TABLE dw.fact_flight_delays (
-    srk_fact SERIAL PRIMARY KEY,
-    srk_carrier INTEGER NOT NULL,
-    srk_airport INTEGER NOT NULL,
-    srk_time INTEGER NOT NULL,
+CREATE TABLE dw.FCT_FIT_DLS (
+    SRK_FCT SERIAL PRIMARY KEY,
+    SRK_CRE INTEGER NOT NULL,
+    SRK_ARR INTEGER NOT NULL,
+    SRK_TME INTEGER NOT NULL,
     
     -- métricas operacionais
-    arr_flights DECIMAL(10,2),
-    arr_del15 DECIMAL(10,2),
-    arr_cancelled DECIMAL(10,2),
-    arr_diverted DECIMAL(10,2),
-    arr_delay DECIMAL(10,2),
+    ARR_FIT DECIMAL(10,2),
+    ARR_DEL DECIMAL(10,2),
+    ARR_CNL DECIMAL(10,2),
+    ARR_DVR DECIMAL(10,2),
+    ARR_DLY DECIMAL(10,2),
     
     -- contagem de atrasos por causa
-    carrier_ct DECIMAL(10,2),
-    weather_ct DECIMAL(10,2),
-    nas_ct DECIMAL(10,2),
-    security_ct DECIMAL(10,2),
-    late_aircraft_ct DECIMAL(10,2),
+    CRE_CT DECIMAL(10,2),
+    WAE_CT DECIMAL(10,2),
+    NAS_CT DECIMAL(10,2),
+    SCR_CT DECIMAL(10,2),
+    LTE_ARA_CT DECIMAL(10,2),
     
     -- tempo de atraso por causa (minutos)
-    carrier_delay DECIMAL(10,2),
-    weather_delay DECIMAL(10,2),
-    nas_delay DECIMAL(10,2),
-    security_delay DECIMAL(10,2),
-    late_aircraft_delay DECIMAL(10,2),
+    CRE_DLY DECIMAL(10,2),
+    WAE_DLY DECIMAL(10,2),
+    NAS_DLY DECIMAL(10,2),
+    SCR_DLY DECIMAL(10,2),
+    LTE_ARA_DLY DECIMAL(10,2),
     
     -- métricas calculadas
-    delay_rate DECIMAL(5,2),
-    cancellation_rate DECIMAL(5,2),
-    diversion_rate DECIMAL(5,2),
-    avg_delay_minutes DECIMAL(10,2),
-    on_time_rate DECIMAL(5,2),
+    DLY_RTE DECIMAL(5,2),
+    CNL_RTE DECIMAL(5,2),
+    DVS_RTE DECIMAL(5,2),
+    AVG_DLY_MNE DECIMAL(10,2),
+    ONT_RTE DECIMAL(5,2),
     
-    UNIQUE(srk_carrier, srk_airport, srk_time),
-    FOREIGN KEY (srk_carrier) REFERENCES dw.dim_carrier(srk_carrier),
-    FOREIGN KEY (srk_airport) REFERENCES dw.dim_airport(srk_airport),
-    FOREIGN KEY (srk_time) REFERENCES dw.dim_time(srk_time)
+    UNIQUE(SRK_CRE, SRK_ARR, SRK_TME),
+    FOREIGN KEY (SRK_CRE) REFERENCES dw.DIM_CRE(SRK_CRE),
+    FOREIGN KEY (SRK_ARR) REFERENCES dw.DIM_ARR(SRK_ARR),
+    FOREIGN KEY (SRK_TME) REFERENCES dw.DIM_TME(SRK_TME)
 );
