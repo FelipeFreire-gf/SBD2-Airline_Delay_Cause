@@ -5,7 +5,7 @@
 **ETL pipeline seguindo a arquitetura Medallion (Raw, Silver, Gold) para análise de dados sobre atrasos de voos em aeroportos dos Estados Unidos.**
 
 <div align="center">
-<img src="/assets/logo.png" alt="Análise de Atrasos de Voos" style="max-width: 400px; height: auto; margin: 20px 0;">
+<img src="https://raw.githubusercontent.com/FelipeFreire-gf/SBD2-Airline_Delay_Cause/refs/heads/main/docs/assets/logo.png" alt="Análise de Atrasos de Voos" style="max-width: 400px; height: auto; margin: 20px 0;">
 </div>
 
 <div align="center">
@@ -34,6 +34,16 @@ O projeto implementa um **pipeline ETL completo** utilizando a **Arquitetura Med
      - Padrões de sazonalidade
      - Cancelamentos e desvios
      - Tendências temporais
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FelipeFreire-gf/SBD2-Airline_Delay_Cause/refs/heads/main/docs/assets/arquitetura2.png" alt="arquitetura" style="max-width: 600px; height: auto; margin: 20px 0;">
+</div>
+
+<div align="center">
+
+</table>
+
+</div>
 
 ---
 
@@ -114,7 +124,7 @@ O projeto implementa um **pipeline ETL completo** utilizando a **Arquitetura Med
   </tr>
 
 <div align="center">
-<img src="/assets/fotoFoto.jpeg" alt="Análise de Atrasos de Voos" style="max-width: 600px; height: auto; margin: 20px 0;">
+<img src="https://raw.githubusercontent.com/FelipeFreire-gf/SBD2-Airline_Delay_Cause/refs/heads/main/docs/assets/fotoFoto.jpeg" alt="Análise de Atrasos de Voos" style="max-width: 600px; height: auto; margin: 20px 0;">
 </div>
 
 <div align="center">
