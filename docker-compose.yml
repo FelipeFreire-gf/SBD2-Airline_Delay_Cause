@@ -14,5 +14,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./Data Layer/silver/ddl.sql:/docker-entrypoint-initdb.d/01-schema.sql
 
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    # Removida a palavra 'run' e mantido o resto
+    command: tunnel --no-autoupdate --url tcp://postgres:5432
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
