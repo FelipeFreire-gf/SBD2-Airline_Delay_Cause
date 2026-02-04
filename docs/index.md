@@ -35,6 +35,16 @@ O projeto implementa um **pipeline ETL completo** utilizando a **Arquitetura Med
      - Cancelamentos e desvios
      - Tendências temporais
 
+<div align="center">
+<img src="https://raw.githubusercontent.com/FelipeFreire-gf/SBD2-Airline_Delay_Cause/refs/heads/main/docs/assets/arquitetura2.png" alt="arquitetura" style="max-width: 600px; height: auto; margin: 20px 0;">
+</div>
+
+<div align="center">
+
+</table>
+
+</div>
+
 ---
 
 ## Principais Análises

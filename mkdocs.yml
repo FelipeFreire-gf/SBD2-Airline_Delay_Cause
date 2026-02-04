@@ -8,19 +8,19 @@ nav:
   - Home: index.md
   
   - Data Base:
-    - Proposito de Avaliação: pages/entrega0/0.md
+    - Base de Dados Escolhida: pages/entrega0/0.md
 
   - Raw:
-    - Planejamento de Avaliação: pages/entrega1/1.md
+    - Desenvolvimento da Raw: pages/entrega1/1.md
 
   - Silver:
-    - Planejamento de Avaliação: pages/entrega1/1.md
+    - Desenvolvimento da Silver: pages/entrega2/2.md
 
   - Gold:
-    - Descrição da Medição: pages/entrega2/2.md
+    - Desenvolvimento da Gold: pages/entrega3/3.md
 
   - Power Bi:
-    - Execução da Medição: pages/entrega3/3.md
+    - Publicação do Dashboard: pages/entrega4/3.md
 
 theme:
   name: material
